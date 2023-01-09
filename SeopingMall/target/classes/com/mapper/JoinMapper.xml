@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.JoinMapper">
+
+	
+	<select id="getLoginCheck" resultType="Map">
+
+		SELECT * FROM MEMBER WHERE MB_ID = #{login_id} AND MB_PASSWORD =#{login_password}
+	
+	</select>
+	
+	<insert id="signUp" parameterType="Map">
+		INSERT INTO member (
+			MB_NO
+			,MB_ID
+			,MB_PASSWORD
+			,mb_name
+		) VALUES (
+		(SELECT MAX(MB_NO)+1 FROM MEMBER)
+		,#{usrId}
+		,#{usrPassword1}
+		,'관리자'
+		)
+	</insert>
+</mapper>
